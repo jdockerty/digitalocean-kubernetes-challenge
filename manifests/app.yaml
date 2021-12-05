@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dok8s-consumer
+spec:
+  selector:
+    matchLabels:
+      app: dok8s-consumer
+  template:
+    metadata:
+      labels:
+        app: dok8s-consumer
+    spec:
+      containers:
+      - name: dok8s-consumer
+        image: jdockerty/digitalocean-kubernetes-challenge:0.1
+        env:
+          - name: DOK8S_ROLE
+            value: CONSUMER
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        imagePullPolicy: Always
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: dok8s-producer
+spec:
+  schedule: "*/1 * * * *" # Every minute
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: dok8s-producer
+            image: jdockerty/digitalocean-kubernetes-challenge:0.1
+            imagePullPolicy: Always
+            env:
+            - name: DOK8S_ROLE
+              value: PRODUCER
+          restartPolicy: OnFailure
