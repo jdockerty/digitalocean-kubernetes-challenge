@@ -8,7 +8,11 @@ Kubernetes cluster is provisioned using `terraform`, to get this up and running,
 
 This will provision the cluster with a single worker node.
 
-Retrieve the `.kubeconfig` file using
+Install the `strimzi` operator for running a Kafka cluster on Kubernetes.
 
     doctl kubernetes cluster kubeconfig save <cluster-id>
     # You can get this full command from the DigitalOcean Kubernetes UI.
+
+    ./terraform/strimzi-install/install.sh
+
+
