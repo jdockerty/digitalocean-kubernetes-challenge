@@ -62,7 +62,7 @@ Your output should look something like
 
 ![Kubernetes jobs](images/jobs_state.png)
 
-Finally, we can check a random pod that has ran under the `CronJob` resource and see the logs that it produced. Using the `dok8s-producer-27311922` pod, we can do the following
+Finally, we can check a random pod that has ran under the `CronJob` resource and see the logs that it produced. We can do the following
 
     kubectl logs dok8s-producer-<id>
 
